@@ -75,8 +75,9 @@ No outputs.
 ## About the Usage of autovars
 
 Execution Apply success outcome reference.
-![apply success]()
 
 Resources provisioned post Terraform Apply.
-![resources provisioned]()
+
+Terraform Auto Documentation Generation process.
+![document generated](./docs/terraform\_auto\_documentation.png)
 <!--  END_IF_DOCS -->
