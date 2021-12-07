@@ -32,6 +32,11 @@ Would preper to provision Database in a Back-end layer and couple of VMs can be 
 - terraform plan
 - terraform apply
 
+
+## Resources Clean-up
+- terraform destroy
+
+
 ## Architecture
 Basic Architecture planned and provisioned for three tier architecture.
-![architecture](three_tier_architecture.png)
+![architecture](threetierarchitecture.png)

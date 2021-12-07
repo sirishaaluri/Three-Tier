@@ -34,12 +34,16 @@ Would preper to provision Database in a Back-end layer and couple of VMs can be 
 - terraform plan
 - terraform apply
 
-## Requirements
-- Terraform to be installed - preffered latest version 1.0.11.
+## Resources Clean-up
+- terraform destroy
 
 ## Architecture
 Basic Architecture planned and provisioned for three tier architecture.
-![architecture](three_tier_architecture.png)
+![architecture](threetierarchitecture.png)
+
+## Requirements
+
+No requirements.
 
 ## Providers
 
@@ -57,31 +61,36 @@ Basic Architecture planned and provisioned for three tier architecture.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_nsg_rules"></a> [app\_nsg\_rules](#input\_app\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>        name = string,<br>        priority = number,<br>        direction = string,<br>        access = string,<br>        protocol = string,<br>        source_address_prefix = string,<br>        source_port_range = string,<br>        destination_address_prefix = string,<br>        destination_port_range = string<br>    }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Outbound",<br>    "name": "ssh-rule-2",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
+| <a name="input_app_nsg_rules"></a> [app\_nsg\_rules](#input\_app\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>    name                       = string,<br>    priority                   = number,<br>    direction                  = string,<br>    access                     = string,<br>    protocol                   = string,<br>    source_address_prefix      = string,<br>    source_port_range          = string,<br>    destination_address_prefix = string,<br>    destination_port_range     = string<br>  }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Outbound",<br>    "name": "ssh-rule-2",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
 | <a name="input_appsubnet_cidr_range"></a> [appsubnet\_cidr\_range](#input\_appsubnet\_cidr\_range) | IP range of subnet for Business/App layer | `string` | `"192.168.2.0/24"` | no |
 | <a name="input_create_resource_group"></a> [create\_resource\_group](#input\_create\_resource\_group) | Do we need resource group to be created or already existed. Provide false if resource group already available. | `bool` | `true` | no |
-| <a name="input_db_nsg_rules"></a> [db\_nsg\_rules](#input\_db\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>        name = string,<br>        priority = number,<br>        direction = string,<br>        access = string,<br>        protocol = string,<br>        source_address_prefix = string,<br>        source_port_range = string,<br>        destination_address_prefix = string,<br>        destination_port_range = string<br>    }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "3306",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.2.0/24",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Deny",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "3306",<br>    "direction": "Outbound",<br>    "name": "ssh-rule-3",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
+| <a name="input_db_nsg_rules"></a> [db\_nsg\_rules](#input\_db\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>    name                       = string,<br>    priority                   = number,<br>    direction                  = string,<br>    access                     = string,<br>    protocol                   = string,<br>    source_address_prefix      = string,<br>    source_port_range          = string,<br>    destination_address_prefix = string,<br>    destination_port_range     = string<br>  }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "3306",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.2.0/24",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Deny",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "3306",<br>    "direction": "Outbound",<br>    "name": "ssh-rule-3",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
 | <a name="input_dbsubnet_cidr_range"></a> [dbsubnet\_cidr\_range](#input\_dbsubnet\_cidr\_range) | IP range of subnet for DB layer | `string` | `"192.168.3.0/24"` | no |
 | <a name="input_location"></a> [location](#input\_location) | Location for the resources to be provisioned | `string` | `"Australia East"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Base name used to frame all resource names in the project | `string` | `"tc"` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | resource group name under which all resource will be provisioned | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags for segregation | `map(any)` | `{}` | no |
-| <a name="input_vm_list"></a> [vm\_list](#input\_vm\_list) | List of VMs | <pre>map(object({<br>        name = string<br>        private_ip_allocation = string<br>        private_ip_address = string<br>    }))</pre> | <pre>{<br>  "one": {<br>    "name": "vm001",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  },<br>  "three": {<br>    "name": "vm003",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  },<br>  "two": {<br>    "name": "vm002",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  }<br>}</pre> | no |
+| <a name="input_vm_list"></a> [vm\_list](#input\_vm\_list) | List of VMs | <pre>map(object({<br>    name                  = string<br>    private_ip_allocation = string<br>    private_ip_address    = string<br>  }))</pre> | <pre>{<br>  "one": {<br>    "name": "vm001",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  },<br>  "three": {<br>    "name": "vm003",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  },<br>  "two": {<br>    "name": "vm002",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  }<br>}</pre> | no |
 | <a name="input_vnet_cidr_range"></a> [vnet\_cidr\_range](#input\_vnet\_cidr\_range) | CIDR range as input to vNet | `string` | `"192.168.0.0/16"` | no |
-| <a name="input_web_nsg_rules"></a> [web\_nsg\_rules](#input\_web\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>        name = string,<br>        priority = number,<br>        direction = string,<br>        access = string,<br>        protocol = string,<br>        source_address_prefix = string,<br>        source_port_range = string,<br>        destination_address_prefix = string,<br>        destination_port_range = string<br>    }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "*",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Deny",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-2",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.3.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
+| <a name="input_web_nsg_rules"></a> [web\_nsg\_rules](#input\_web\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>    name                       = string,<br>    priority                   = number,<br>    direction                  = string,<br>    access                     = string,<br>    protocol                   = string,<br>    source_address_prefix      = string,<br>    source_port_range          = string,<br>    destination_address_prefix = string,<br>    destination_port_range     = string<br>  }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "*",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Deny",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "22",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-2",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.3.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
 | <a name="input_websubnet_cidr_range"></a> [websubnet\_cidr\_range](#input\_websubnet\_cidr\_range) | IP range of subnet for Web layer | `string` | `"192.168.1.0/24"` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_sql_database_name"></a> [sql\_database\_name](#output\_sql\_database\_name) | SQl Database name |
+| <a name="output_sql_server_id"></a> [sql\_server\_id](#output\_sql\_server\_id) | SQl Server resource ID |
 
 ## About the Usage of autovars
 
 Execution Apply success outcome reference.
+![apply success](applysuccess.png)
 
 Resources provisioned post Terraform Apply.
+![resources provisioned](resourcesprovisioned.png)
 
 Terraform Auto Documentation Generation process.
-![document generated](terraform_auto_documentation.png)
+![document generated](terraformautodocumentation.png)
 
 <!--  END_IF_DOCS -->
