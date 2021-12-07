@@ -1,7 +1,7 @@
 variable "name" {
     description = "Base name used to frame all resource names in the project"
     type = string
-    default = "TC"
+    default = "tc"
 }
 
 variable "location" {

@@ -22,7 +22,7 @@ Would preper to provision Database in a Back-end layer and couple of VMs can be 
 - Can be extended further with load balancers at App layer and private end point to SQL Server.
 - All inputs were framed as default values, which can be overridden through autovars file.
 - VM inputs were takes static in the interest of time, hence all three VMs will be created with same configuration.
-- Number of VMs can be created do not have a limit, is based on number of inputs values we pass for vm\_list.
+- Do not have any Limit on the Number of VMs can be created, is based on number of inputs values we pass for vm\_list.
 - All validation been taken care - eg:- resource group can be created OR can take the existed value, based on inputs provided.
 
 ## Execution Flow
@@ -60,7 +60,7 @@ No requirements.
 | <a name="input_db_nsg_rules"></a> [db\_nsg\_rules](#input\_db\_nsg\_rules) | Inbound and outbound rules for network security group applied to subnet created fro Web layer | <pre>map(object({<br>        name = string,<br>        priority = number,<br>        direction = string,<br>        access = string,<br>        protocol = string,<br>        source_address_prefix = string,<br>        source_port_range = string,<br>        destination_address_prefix = string,<br>        destination_port_range = string<br>    }))</pre> | <pre>{<br>  "rule001": {<br>    "access": "Allow",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "3306",<br>    "direction": "Inbound",<br>    "name": "ssh-rule-1",<br>    "priority": 101,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.2.0/24",<br>    "source_port_range": "*"<br>  },<br>  "rule002": {<br>    "access": "Deny",<br>    "destination_address_prefix": "*",<br>    "destination_port_range": "3306",<br>    "direction": "Outbound",<br>    "name": "ssh-rule-3",<br>    "priority": 100,<br>    "protocol": "Tcp",<br>    "source_address_prefix": "192.168.1.0/24",<br>    "source_port_range": "*"<br>  }<br>}</pre> | no |
 | <a name="input_dbsubnet_cidr_range"></a> [dbsubnet\_cidr\_range](#input\_dbsubnet\_cidr\_range) | IP range of subnet for DB layer | `string` | `"192.168.3.0/24"` | no |
 | <a name="input_location"></a> [location](#input\_location) | Location for the resources to be provisioned | `string` | `"Australia East"` | no |
-| <a name="input_name"></a> [name](#input\_name) | Base name used to frame all resource names in the project | `string` | `"TC"` | no |
+| <a name="input_name"></a> [name](#input\_name) | Base name used to frame all resource names in the project | `string` | `"tc"` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | resource group name under which all resource will be provisioned | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags for segregation | `map(any)` | `{}` | no |
 | <a name="input_vm_list"></a> [vm\_list](#input\_vm\_list) | List of VMs | <pre>map(object({<br>        name = string<br>        private_ip_allocation = string<br>        private_ip_address = string<br>    }))</pre> | <pre>{<br>  "one": {<br>    "name": "vm001",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  },<br>  "three": {<br>    "name": "vm003",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  },<br>  "two": {<br>    "name": "vm002",<br>    "private_ip_address": "",<br>    "private_ip_allocation": "Dynamic"<br>  }<br>}</pre> | no |
@@ -73,4 +73,10 @@ No requirements.
 No outputs.
 
 ## About the Usage of autovars
+
+Execution Apply success outcome reference.
+![apply success]()
+
+Resources provisioned post Terraform Apply.
+![resources provisioned]()
 <!--  END_IF_DOCS -->

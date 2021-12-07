@@ -19,7 +19,7 @@ Would preper to provision Database in a Back-end layer and couple of VMs can be 
 - Can be extended further with load balancers at App layer and private end point to SQL Server.
 - All inputs were framed as default values, which can be overridden through autovars file.
 - VM inputs were takes static in the interest of time, hence all three VMs will be created with same configuration.
-- Number of VMs can be created do not have a limit, is based on number of inputs values we pass for vm_list.
+- Do not have any Limit on the Number of VMs can be created, is based on number of inputs values we pass for vm_list.
 - All validation been taken care - eg:- resource group can be created OR can take the existed value, based on inputs provided.
 
 
@@ -31,3 +31,7 @@ Would preper to provision Database in a Back-end layer and couple of VMs can be 
 - Initialize all the modules reffered in code through "terraform init"
 - terraform plan
 - terraform apply
+
+## Architecture
+Basic Architecture planned and provisioned for three tier architecture.
+![architecture](three_tier_architecture.png)
