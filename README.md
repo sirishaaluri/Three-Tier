@@ -35,8 +35,11 @@ Would preper to provision Database in a Back-end layer and couple of VMs can be 
 - terraform apply
 
 ## Requirements
+- Terraform to be installed - preffered latest version 1.0.11.
 
-No requirements.
+## Architecture
+Basic Architecture planned and provisioned for three tier architecture.
+![architecture](three_tier_architecture.png)
 
 ## Providers
 
@@ -79,5 +82,6 @@ Execution Apply success outcome reference.
 Resources provisioned post Terraform Apply.
 
 Terraform Auto Documentation Generation process.
-![document generated](./docs/terraform\_auto\_documentation.png)
+![document generated](terraform_auto_documentation.png)
+
 <!--  END_IF_DOCS -->
